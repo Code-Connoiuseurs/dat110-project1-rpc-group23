@@ -21,8 +21,7 @@ public class RPCClient {
 		// TODO - START
 		// connect using the RPC client
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		this.connection = msgclient.connect();
 		
 		// TODO - END
 	}
@@ -32,8 +31,7 @@ public class RPCClient {
 		// TODO - START
 		// disconnect by closing the underlying messaging connection
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		this.connection.close();
 		
 		// TODO - END
 	}

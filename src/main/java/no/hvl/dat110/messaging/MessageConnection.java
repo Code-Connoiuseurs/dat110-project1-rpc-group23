@@ -39,9 +39,15 @@ public class MessageConnection {
 		// TODO - START
 		// encapsulate the data contained in the Message and write to the output stream
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-			
+		byte[] encoded = MessageUtils.encapsulate(message);
+		
+		try {
+			outStream.write(encoded);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		// TODO - END
 
 	}
@@ -54,8 +60,16 @@ public class MessageConnection {
 		// TODO - START
 		// read a segment from the input stream and decapsulate data into a Message
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		byte[] encoded = null;
+		
+		try {
+			encoded = inStream.readNBytes(MessageUtils.SEGMENTSIZE);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		message = MessageUtils.decapsulate(encoded);
 		
 		// TODO - END
 		
