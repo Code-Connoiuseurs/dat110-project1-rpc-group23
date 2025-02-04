@@ -68,7 +68,9 @@ public class RPCUtils {
 		
 		String decoded = null; 
 		
-		// TODO - START 
+		// TODO - START
+		
+		if (data == null) return "";
 
 		decoded = new String(data, StandardCharsets.US_ASCII);
 		
