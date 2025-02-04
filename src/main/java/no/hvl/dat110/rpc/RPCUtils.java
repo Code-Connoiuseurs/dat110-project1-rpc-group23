@@ -34,6 +34,8 @@ public class RPCUtils {
 		
 		// TODO - START
 		
+		if (rpcmsg.length <= 1) return payload;
+		
 		payload = new byte[rpcmsg.length-1];
 		
 		// Decapsulate the rpcid and payload in a byte array according to the RPC message syntax
@@ -81,9 +83,8 @@ public class RPCUtils {
 		
 		// TODO - START 
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-				
+		encoded = new byte[0];
+		
 		// TODO - END
 		
 		return encoded;
@@ -93,9 +94,6 @@ public class RPCUtils {
 	public static void unmarshallVoid(byte[] data) {
 		
 		// TODO
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
 		
 	}
 

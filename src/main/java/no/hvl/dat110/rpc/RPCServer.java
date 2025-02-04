@@ -30,7 +30,7 @@ public class RPCServer {
 		
 		System.out.println("RPC SERVER RUN - Services: " + services.size());
 			
-		connection = msgserver.accept(); 
+		connection = msgserver.accept();
 		
 		System.out.println("RPC SERVER ACCEPTED");
 		
@@ -39,6 +39,7 @@ public class RPCServer {
 		while (!stop) {
 	    
 		   byte rpcid = 0;
+		   
 		   Message requestmsg, replymsg;
 		   
 		   // TODO - START
@@ -50,8 +51,17 @@ public class RPCServer {
 		   // - encapsulate return value 
 		   // - send back the message containing the RPC reply
 			
-		   if (true)
-				throw new UnsupportedOperationException(TODO.method());
+		   requestmsg = connection.receive();
+		   
+		   rpcid = requestmsg.getData()[0];
+		   
+		   byte[] payload = RPCUtils.decapsulate(requestmsg.getData());
+		   
+		   RPCRemoteImpl method = services.get(rpcid);
+		   
+		   replymsg = new Message(RPCUtils.encapsulate(rpcid, method.invoke(payload)));
+		   
+		   connection.send(replymsg);
 		   
 		   // TODO - END
 
