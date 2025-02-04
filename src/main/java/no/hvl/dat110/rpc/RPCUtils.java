@@ -2,8 +2,6 @@ package no.hvl.dat110.rpc;
 
 import java.nio.ByteBuffer;
 
-import no.hvl.dat110.TODO;
-
 public class RPCUtils {
 
 	public static byte[] encapsulate(byte rpcid, byte[] payload) {
@@ -29,7 +27,9 @@ public class RPCUtils {
 
 		// Decapsulate the rpcid and payload in a byte array according to the RPC
 		// message syntax
-
+		if (rpcmsg.length == 0) {
+			return new byte[0];
+		}
 		payload = new byte[rpcmsg.length - 1];
 
 		for (int i = 0; i < payload.length; i++) {
@@ -64,24 +64,13 @@ public class RPCUtils {
 
 		byte[] encoded = null;
 
-		// TODO - START
-
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - END
+		encoded = new byte[0];
 
 		return encoded;
 
 	}
 
 	public static void unmarshallVoid(byte[] data) {
-
-		// TODO
-
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-
 	}
 
 	// convert boolean to a byte array representation

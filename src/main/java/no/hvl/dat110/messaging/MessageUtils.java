@@ -9,12 +9,12 @@ public class MessageUtils {
 
 	public static byte[] encapsulate(Message message) {
 
-		byte[] segment = null;
+		byte[] segment = new byte[SEGMENTSIZE];
 		byte[] data;
 
 		// encapulate/encode the payload data of the message and form a segment
 		// according to the segment format for the messaging layer
-		segment = new byte[SEGMENTSIZE];
+//		segment = new byte[SEGMENTSIZE];
 		data = message.getData();
 		segment[0] = (byte) data.length;
 
@@ -29,10 +29,12 @@ public class MessageUtils {
 	public static Message decapsulate(byte[] segment) {
 
 		Message message = null;
-
 		// decapsulate segment and put received payload data into a message
-		byte[] payload = new byte[segment[0]];
-		int length = segment[0];
+		int length = (int) segment[0];
+		if(length == 0) {
+			return new Message(new byte[(int)segment[0]]);
+		}
+		byte[] payload = new byte[length];
 		for (int i = 1; i < length + 1; i++) {
 			payload[i - 1] = segment[i];
 		}
