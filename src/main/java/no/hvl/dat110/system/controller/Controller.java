@@ -40,6 +40,12 @@ public class Controller  {
 		for (int i = 1; i <= N; i++) {
 			int readTemp = sensor.read();			
 			display.write(Integer.toString(readTemp));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		// TODO - END
