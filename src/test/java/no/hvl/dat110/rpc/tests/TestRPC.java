@@ -1,17 +1,18 @@
 package no.hvl.dat110.rpc.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import no.hvl.dat110.rpc.RPCClient;
-import no.hvl.dat110.rpc.RPCServer;
 import no.hvl.dat110.rpc.RPCClientStopStub;
-
-import java.util.concurrent.atomic.AtomicBoolean;
+import no.hvl.dat110.rpc.RPCServer;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class TestRPC {
