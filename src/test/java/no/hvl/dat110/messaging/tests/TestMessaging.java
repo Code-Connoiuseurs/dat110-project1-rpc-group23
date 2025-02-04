@@ -1,17 +1,17 @@
 package no.hvl.dat110.messaging.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
-import no.hvl.dat110.messaging.MessageConnection;
 import no.hvl.dat110.messaging.Message;
+import no.hvl.dat110.messaging.MessageConnection;
 import no.hvl.dat110.messaging.MessageUtils;
 import no.hvl.dat110.messaging.MessagingClient;
 import no.hvl.dat110.messaging.MessagingServer;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TestMessaging {
 

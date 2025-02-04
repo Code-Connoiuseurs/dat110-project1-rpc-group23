@@ -6,8 +6,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import no.hvl.dat110.TODO;
-
 
 public class MessageConnection {
 
@@ -33,34 +31,40 @@ public class MessageConnection {
 	}
 
 	public void send(Message message) {
+		try {
+		byte[] data = message.getData();
 
-		byte[] data;
-		
-		// TODO - START
 		// encapsulate the data contained in the Message and write to the output stream
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-			
-		// TODO - END
-
+		outStream.writeByte(data.length);
+		outStream.write(data);
+		outStream.flush();
+		} catch (IOException ex) {
+			System.out.println("Send error: " + ex.getMessage());
+			ex.printStackTrace();
+		}
 	}
 
 	public Message receive() {
 
-		Message message = null;
-		byte[] data;
-		
-		// TODO - START
 		// read a segment from the input stream and decapsulate data into a Message
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - END
-		
+		Message message = null;
+		try {
+			int mLength = inStream.readByte();
+
+			if(mLength < 1 || mLength > 127) {
+				throw new IOException("Invalid message length recieved" + mLength);
+			}
+
+			byte[] data = new byte[mLength];
+			inStream.readFully(data);	
+
+			message = new Message(data); 
+
+		} catch (IOException ex) {
+			System.out.println("Receieve error: " + ex.getMessage());
+			ex.printStackTrace();
+		}
 		return message;
-		
 	}
 
 	// close the connection by closing streams and the underlying socket	

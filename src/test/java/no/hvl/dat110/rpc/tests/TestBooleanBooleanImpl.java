@@ -1,8 +1,8 @@
 package no.hvl.dat110.rpc.tests;
 
 import no.hvl.dat110.rpc.RPCRemoteImpl;
-import no.hvl.dat110.rpc.RPCUtils;
 import no.hvl.dat110.rpc.RPCServer;
+import no.hvl.dat110.rpc.RPCUtils;
 
 public class TestBooleanBooleanImpl extends RPCRemoteImpl {
 

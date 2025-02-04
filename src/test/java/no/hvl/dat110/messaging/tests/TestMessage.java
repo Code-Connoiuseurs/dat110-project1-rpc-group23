@@ -1,10 +1,9 @@
 package no.hvl.dat110.messaging.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Arrays;
 
-// import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import no.hvl.dat110.messaging.Message;
