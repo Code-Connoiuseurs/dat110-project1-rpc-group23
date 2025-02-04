@@ -56,7 +56,14 @@ public class RPCServer {
 
 			// - invoke the method and pass the param
 			byte[] returnval = method.invoke(payload);
-
+			
+			// Måtte legge til en sleep her for å få lest forskjellige verdier
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			// - encapsulate return value
 			returnval = RPCUtils.encapsulate(rpcid, returnval);
 

@@ -27,7 +27,7 @@ public class MessagingClient {
 		// connect to messaging server using a TCP socket
 		// create and return a corresponding messaging connection
 		try {
-			clientSocket = new Socket(server, port);
+			clientSocket = new Socket(this.server, this.port);
 			connection = new MessageConnection(clientSocket);
 		} catch (IOException e) {
 			e.printStackTrace();
