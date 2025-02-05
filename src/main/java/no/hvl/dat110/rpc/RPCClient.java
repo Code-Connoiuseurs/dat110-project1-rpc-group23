@@ -52,7 +52,7 @@ public class RPCClient {
 		Message reply = connection.receive();
 
 		returnval = RPCUtils.decapsulate(reply.getData());
-		
+
 		/*
 		The rpcid and param must be encapsulated according to the RPC message format
 		The return value from the RPC call must be decapsulated according to the RPC message format
@@ -61,5 +61,4 @@ public class RPCClient {
 		return returnval;
 		
 	}
-
 }
