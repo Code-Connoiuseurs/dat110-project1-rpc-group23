@@ -27,7 +27,8 @@ public class RPCServer {
 		
 		// the stop RPC method is built into the server
 		RPCRemoteImpl rpcstop = new RPCServerStopImpl(RPCCommon.RPIDSTOP,this);
-		
+		register(RPCCommon.RPIDSTOP, rpcstop);
+
 		System.out.println("RPC SERVER RUN - Services: " + services.size());
 			
 		connection = msgserver.accept(); 
@@ -37,30 +38,41 @@ public class RPCServer {
 		boolean stop = false;
 		
 		while (!stop) {
-	    
-		   byte rpcid = 0;
-		   Message requestmsg, replymsg;
-		   
-		   // TODO - START
-		   // - receive a Message containing an RPC request
-		   // - extract the identifier for the RPC method to be invoked from the RPC request
-		   // - extract the method's parameter by decapsulating using the RPCUtils
-		   // - lookup the method to be invoked
-		   // - invoke the method and pass the param
-		   // - encapsulate return value 
+
+	    try {
+
+			// - receive a Message containing an RPC request
+			Message requestmsg = connection.receive();
+			byte[] rpcRequest = requestmsg.getData();
+
+			// - extract the identifier for the RPC method to be invoked from the RPC request
+			byte rpcid = rpcRequest[0];
+			byte[] param = RPCUtils.decapsulate(rpcRequest);
+
+			// - extract the method's parameter by decapsulating using the RPCUtils
+			RPCRemoteImpl method = services.get(rpcid);
+			if(method == null) {
+				throw new IllegalStateException("No RPC method registered for id: " + rpcid);
+			}
+			// - lookup the method to be invoked
+			byte[] result = method.invoke(param);
+
+			// - invoke the method and pass the param
+			byte[] rpcReply = RPCUtils.encapsulate(rpcid, result);
+
 		   // - send back the message containing the RPC reply
-			
-		   if (true)
-				throw new UnsupportedOperationException(TODO.method());
-		   
-		   // TODO - END
+		   connection.send(new Message(rpcReply));
 
 			// stop the server if it was stop methods that was called
-		   if (rpcid == RPCCommon.RPIDSTOP) {
-			   stop = true;
-		   }
+			if(rpcid == RPCCommon.RPIDSTOP) {
+				stop = true;
+			}
+
+		} catch(Exception ex) {
+			System.out.println("Error during RPC process: " + ex.getMessage());
+			}
 		}
-	
+		stop();
 	}
 	
 	// used by server side method implementations to register themselves in the RPC server
